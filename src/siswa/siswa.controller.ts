@@ -1,43 +1,38 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
+
+// siswa.controller.ts
+
+import { Controller, Get, Post, Body, Param, Put, NotFoundException } from '@nestjs/common';
 import { SiswaService } from './siswa.service';
-import { CreatePtsDto, FindPtsDto, UpdatePtsDto } from './siswa.dto';
-import { FindBookDto } from 'src/book/book.dto';
-import { Pagination } from 'src/utils/decorator/pagination.decorator';
+import { CreateSiswaDto } from './create-siswa.dto';
+import { UpdateSiswaDto } from './update-siswa.dto.';
+
 
 @Controller('siswa')
 export class SiswaController {
-    
-    constructor(private SiswaService: SiswaService) {}
+  constructor(private readonly siswaService: SiswaService) {}
 
-    @Get('list')
-    async findAllBook(@Pagination() query: FindPtsDto ) {
-        return this.SiswaService.findAllBook(query);
-    }
+  @Get('list')
+  findAll() {
+    return this.siswaService.findAll();
+  }
 
-    @Post('create')
-    async createBook(@Body() payload : CreatePtsDto){
-        return this.SiswaService.create(payload)
+  @Get('detail/:id')
+  findOne(@Param('id') id: string) {
+    const siswa = this.siswaService.findOne(+id);
+    if (!siswa) {
+      throw new NotFoundException('Siswa tidak ditemukan');
     }
+    return siswa;
+  }
 
-    @Get("detail/:id")
-    async detail(@Param('id') id: number){
-        return this.SiswaService.detail(+id)
-    }
+  @Post('create')
+  create(@Body() createSiswaDto: CreateSiswaDto) {
+    return this.siswaService.create(createSiswaDto);
+  }
 
-    @Put("update/:id")
-    async update(@Body() payload : UpdatePtsDto , @Param("id") id : string){
-        return this.SiswaService.update(+id , payload)
-    }
-
-    @Delete("delete/:id")
-    async delete(@Param("id") id: number){
-        return this.SiswaService.delete(id)
-    }
-
-    @Delete("delete")
-    async deleteMulti(@Query("id") id : string) {
-        const idArray = id.split(",")
-        return this.SiswaService.deleteMulti(idArray)
-    }
+  @Put('update/:id')
+  update(@Param('id') id: string, @Body() updateSiswaDto: UpdateSiswaDto) {
+    return this.siswaService.update(+id, updateSiswaDto);
+  }
 
 }

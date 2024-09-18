@@ -4,7 +4,7 @@ class BaseResponse {
     _success (msg : string , data? : any) : ResponseSuccess{
         return {
             status : "success",
-            msg : msg,
+            message : msg,
             data : data || {},
         };
     }
@@ -17,8 +17,8 @@ class BaseResponse {
     pageSize : number 
     ) : ResponsePagination {
         return {
-            status : "succes",
-            msg : message,
+            status : "Success",
+            message : message,
             data : data || {},
             pagination : {
                 total : total ,

@@ -1,28 +1,28 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class siswa extends BaseEntity {
-   @PrimaryGeneratedColumn()
-   id : Number;
+export class Siswa extends BaseEntity {
+  @PrimaryGeneratedColumn()
+  id: string; 
 
-   nama : string;
+  @Column()
+  nama: string;
 
-   @Column()
-   tempat_lahir:string;
+  @Column({ unique: true })
+  email: string;
 
-   @Column()
-   tanggal_lahir:number;
+  @Column()
+  tempat_lahir: string;
 
-   @Column()
-   nisn:number;
+  @Column('date')
+  tanggal_lahir: Date;
 
-   @Column()
-   nik:number;
+  @Column()
+  nisn: string;
 
-   @Column()
-   email:string;
+  @Column()
+  nik: string;
 
-   @Column({type : 'text'})
-   alamat:string;
-
+  @Column()
+  alamat: string;
 }

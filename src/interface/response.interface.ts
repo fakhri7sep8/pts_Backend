@@ -1,6 +1,6 @@
 export interface ResponseSuccess {
     status : string ,
-    msg : string ,
+    message : string ,
     data? : any ,
 }
 

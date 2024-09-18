@@ -1,8 +1,9 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { SiswaController } from './siswa.controller';
 
-describe('SiswaController', () => {
-  let controller: SiswaController;
+import { Test, TestingModule } from '@nestjs/testing';
+import {SiswaController } from './siswa.controller';
+
+describe('BookController', () => {
+  let controller:SiswaController;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -12,7 +13,7 @@ describe('SiswaController', () => {
     controller = module.get<SiswaController>(SiswaController);
   });
 
-  it('should be defined', () => {
+  it('tidak dapat menemukan', () => {
     expect(controller).toBeDefined();
-  });
+  });
 });
